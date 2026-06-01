@@ -3,11 +3,14 @@ import { ArchiveIcon, MessageCircleIcon, ThumbsUpIcon } from 'lucide-react'
 import { Section } from '@/components/section'
 import { Card } from '@/components/card'
 import { Button } from '@/components/button'
+import type { Metadata } from 'next'
 
 interface BoardProps {
   searchParms: Promise<{ q?: string }>
 }
-
+export const metadata: Metadata = {
+  title: 'Board',
+}
 export default async function Board({ searchParms }: BoardProps) {
   return (
     <main className="grid grid-cols-4 gap-5 flex-1 items-stretch">
