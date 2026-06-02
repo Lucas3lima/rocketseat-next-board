@@ -1,10 +1,16 @@
 import Link from 'next/link'
 import { Button } from '@/components/button'
-import { ArchiveIcon, MoveLeftIcon, ThumbsUpIcon } from 'lucide-react'
+import {
+  ArchiveIcon,
+  MessageCirclePlusIcon,
+  MoveLeftIcon,
+  ThumbsUpIcon,
+} from 'lucide-react'
 import { getIssue } from '@/http/get-issue'
 import { IssueCommentsList } from './issue-comments/issue-comments-list'
 import { Suspense } from 'react'
 import { IssueCommentsSkeleton } from './issue-comments/issue-comments-skeleton'
+import { Input } from '@/components/input'
 
 interface IssuePageProps {
   params: Promise<{ id: string }>
@@ -60,7 +66,19 @@ export default async function IssueDetailPage({ params }: IssuePageProps) {
 
       <div className="flex flex-col gap-2">
         <span className="font-semibold">Comments</span>
-        <form />
+        <form className="relative w-full">
+          <Input
+            className="w-full bg-navy-900 h-11 pr-24 "
+            placeholder="Leave a comment"
+          />
+          <button
+            type="submit"
+            className="flex items-center gap-2 absolute text-indigo-400 right-3 top-1/2 -translate-y-1/2 cursor-pointer text-xs hover:text-indigo-300 disabled:opacity-50"
+          >
+            Publish
+            <MessageCirclePlusIcon className="size-3" />
+          </button>
+        </form>
         <div className="mt-3">
           <Suspense fallback={<IssueCommentsSkeleton />}>
             <IssueCommentsList issueId={issue.id} />
