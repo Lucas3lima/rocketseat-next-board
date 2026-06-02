@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Button } from '@/components/button'
 import { ArchiveIcon, MoveLeftIcon, ThumbsUpIcon } from 'lucide-react'
 import { getIssue } from '@/http/get-issue'
+import { IssueCommentsList } from './issue-comments/issue-comments-list'
 
 interface IssuePageProps {
   params: Promise<{ id: string }>
@@ -53,6 +54,14 @@ export default async function IssueDetailPage({ params }: IssuePageProps) {
         <p className="text-sm text-navy-300 leading-relaxed">
           {issue.description}
         </p>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <span className="font-semibold">Comments</span>
+        <form />
+        <div className="mt-3">
+          <IssueCommentsList issueId={issue.id} />
+        </div>
       </div>
     </main>
   )
