@@ -10,6 +10,7 @@ export function SearchInput() {
   function handleSearchUpdate(event: React.ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value, {
       limitUrlUpdates: event.target.value !== '' ? debounce(500) : undefined,
+      shallow: false,
     })
   }
   return (
