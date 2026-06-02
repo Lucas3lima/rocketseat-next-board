@@ -1,6 +1,6 @@
+import { listIssueComments } from '@/http/list-issue-comments'
 import { Comment } from '@/components/comment'
 import { formatDistanceToNow } from 'date-fns'
-import { listIssueComments } from '@/http/list-issue-comments'
 
 interface IssueCommentsListProps {
   issueId: string
