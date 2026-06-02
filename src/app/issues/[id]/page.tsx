@@ -1,3 +1,6 @@
+import Link from 'next/link'
+import { Button } from '@/components/button'
+import { ArchiveIcon, MoveLeftIcon, ThumbsUpIcon } from 'lucide-react'
 import { getIssue } from '@/http/get-issue'
 
 interface IssuePageProps {
@@ -13,10 +16,44 @@ export const generateMetadata = async ({ params }: IssuePageProps) => {
   }
 }
 
+const statusLabels = {
+  backlog: 'Backlog',
+  todo: 'Todo',
+  in_progress: 'In Progress',
+  done: 'Done',
+} as const
+
 export default async function IssueDetailPage({ params }: IssuePageProps) {
   const { id } = await params
 
   const issue = await getIssue({ id })
 
-  return <pre>{JSON.stringify(issue, null, 2)}</pre>
+  return (
+    <main className="max-w-[900px] mx-auto w-full flex flex-col gap-4 p-6 bg-navy-800 border-[0.5px] border-navy-500 rounded-xl">
+      <Link
+        href="/"
+        className="flex items-center gap-2 text-navy-200 hover:text-navy-500 transition-colors"
+      >
+        <MoveLeftIcon className="size-4" />
+        <span className="text-xs ">Back to board</span>
+      </Link>
+      <div className="flex items-center gap-2">
+        <span className="bg-navy-700 rounded-lg px-3 py-1.5 flex items-center gap-2 text-xs">
+          <ArchiveIcon className="size-3" />
+          {statusLabels[issue.status]}
+        </span>
+
+        <Button>
+          <ThumbsUpIcon className="size-3" />
+          <span className="text-sm">12</span>
+        </Button>
+      </div>
+      <div className="space-y-2">
+        <h1 className="text-2xl font-semibold text-navy-100">{issue.title}</h1>
+        <p className="text-sm text-navy-300 leading-relaxed">
+          {issue.description}
+        </p>
+      </div>
+    </main>
+  )
 }

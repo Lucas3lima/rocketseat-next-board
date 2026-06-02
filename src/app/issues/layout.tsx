@@ -1,6 +1,6 @@
-import { Header } from '@/app/(board)/header/header'
+import { Header } from './header/header'
 
-export default function BoardLayout({
+export default function IssuesLayout({
   children,
 }: {
   children: React.ReactNode
