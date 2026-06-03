@@ -53,9 +53,7 @@ export default async function IssueDetailPage({ params }: IssuePageProps) {
           <ArchiveIcon className="size-3" />
           {statusLabels[issue.status]}
         </span>
-        <Suspense fallback={<Skeleton className="h-7 w-16" />}>
-          <IssueLikeButton issueId={issue.id} />
-        </Suspense>
+        <IssueLikeButton issueId={issue.id} />
       </div>
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold text-navy-100">{issue.title}</h1>
