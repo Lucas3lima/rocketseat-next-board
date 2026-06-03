@@ -1,5 +1,7 @@
 import { SearchInput } from './search-input'
 import { UserButton } from '../../../components/header/user-button'
+import { Suspense } from 'react'
+import { Skeleton } from '@/components/skeleton'
 
 export function Header() {
   return (
@@ -12,8 +14,9 @@ export function Header() {
       </div>
 
       <div className="flex items-center gap-4">
-        <SearchInput />
-
+        <Suspense fallback={<Skeleton className="w-72 h-10" />}>
+          <SearchInput />
+        </Suspense>
         <UserButton />
       </div>
     </div>
