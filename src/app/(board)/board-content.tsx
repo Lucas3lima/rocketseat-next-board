@@ -23,12 +23,10 @@ export function BoardContent({ issues }: BoardContentProps) {
     ...issues.done.map((issue) => issue.id),
   ]
 
-  const { data: interactionsData, isLoading: isLoadingInteractions } = useQuery(
-    {
-      queryKey: ['issue-likes', alllIssuesIds.sort().join(',')],
-      queryFn: () => getIssueInteractions({ issueIds: alllIssuesIds }),
-    },
-  )
+  const { data: interactionsData } = useQuery({
+    queryKey: ['issue-likes', alllIssuesIds.sort().join(',')],
+    queryFn: () => getIssueInteractions({ issueIds: alllIssuesIds }),
+  })
 
   const interactions = useMemo(() => {
     if (!interactionsData) {
