@@ -1,9 +1,11 @@
 'use client'
 import { Loader2Icon, LogInIcon } from 'lucide-react'
 import { authClient } from '@/lib/auth-client'
+import { useRouter } from 'next/navigation'
 
 export function UserButton() {
   const { data: session, isPending } = authClient.useSession()
+  const router = useRouter()
 
   async function handleSignIn() {
     await authClient.signIn.social({
@@ -13,7 +15,13 @@ export function UserButton() {
   }
 
   async function handleSignOut() {
-    await authClient.signOut()
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push('/')
+        },
+      },
+    })
   }
   return (
     <>
